@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FoodShare+ | Sign In</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="left-content">
+      <img class="logo" src="/static/asset/logo.png" alt="FoodShare+ Logo"/>
+      <h2>Welcome to FoodShare+</h2>
+      <p class="tagline">
+        Your kindness can affect somebody’s life. Let’s work together to make a better world!
+      </p>
+      <div class="social-icons">
+        <a href="#" title="WhatsApp">
+          <img src="/static/asset/ws.png" alt="WhatsApp" />
+        </a>
+        <a href="#" title="Telegram">
+          <img src="/static/asset/tele.png" alt="Telegram" />
+        </a>
+        <a href="#" title="Instagram">
+          <img src="/static/asset/ig.jpg" alt="Instagram" />
+        </a>
+        <a href="#" title="Facebook">
+          <img src="/static/asset/fb.png" alt="Facebook" />
+        </a>
+      </div>
+      <div class="contact-info">
+        <p>Contact us</p>
+        <p>001-0102-2025</p>
+      </div>
+    </div>
+    <div class="right-content">
+      <h3>Sign In</h3>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <p class="flash {{ category }}">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <form class="login-form" action="/" method="post">
+        <label for="email">Your email</label>
+        <input type="email" id="email" name="email" placeholder="Your email" required />
+        <label for="password">Your password</label>
+        <input type="password" id="password" name="password" placeholder="Your password" required />
+        <button type="submit">Sign in</button>
+        <div class="links">
+          <a href="#">Don’t have an account?</a>
+          <a href="#">Forget Password?</a>
+        </div>
+        <p class="terms">
+          By clicking “Sign in”, you agree to our
+          <a href="#">terms of service</a> | <a href="#">privacy policy</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

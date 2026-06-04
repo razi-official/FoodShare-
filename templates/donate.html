@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate - FoodShare+</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <style>
+    html, body {
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    body.donate-page {
+      background: url('/static/asset/bg2.png') no-repeat center top;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .donation-container {
+      width: 650px;
+      margin: 8rem auto 0 auto;
+      padding: 2rem;
+      background: none;
+      box-shadow: none;
+      border-radius: 0;
+      position: relative;
+      left: 20px;
+    }
+    .donation-title {
+      color: #2ea44f;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+    .donation-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .form-row {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .form-row label {
+      min-width: 150px;
+      text-align: left;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .form-row input {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1.1rem;
+    }
+    .submit-donation {
+      display: block;
+      margin: 2rem auto 0;
+      background-color: #2ea44f;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .submit-donation:hover {
+      background-color: #22863a;
+    }
+  </style>
+</head>
+<body class="donate-page">
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="/static/asset/logo.png" alt="FoodShare+ Logo" />
+        <h1>FoodShare+</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/donate" class="active">Donate</a></li>
+          <li><a href="/request">Request</a></li>
+          <li><a href="/listings">Listings</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="donation-container">
+    <h1 class="donation-title">Donation</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <p class="flash {{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form class="donation-form" method="POST" action="/donate" enctype="multipart/form-data">
+      <div class="form-row">
+        <label for="donor-name">Name:</label>
+        <input type="text" id="donor-name" name="donor-name" value="{{ form.get('donor-name', '') if form else '' }}" required />
+      </div>
+      <div class="form-row">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="{{ form.get('location', '') if form else '' }}" required />
+      </div>
+      <div class="form-row">
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" value="{{ form.get('contact', '') if form else '' }}" required />
+      </div>
+      <div class="form-row">
+        <label for="food-type">Type of Food:</label>
+        <input type="text" id="food-type" name="food-type" value="{{ form.get('food-type', '') if form else '' }}" required />
+      </div>
+      <div class="form-row">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="{{ form.get('quantity', '') if form else '' }}" required />
+      </div>
+      <div class="form-row">
+        <label for="donation-date">Donation Date:</label>
+        <input type="date" id="donation-date" name="donation-date" value="{{ form.get('donation-date', '') if form else '' }}" required />
+      </div>
+      <div class="form-row">
+        <label for="expiry-date">Food Expiry Date:</label>
+        <input type="date" id="expiry-date" name="expiry-date" value="{{ form.get('expiry-date', '') if form else '' }}" />
+      </div>
+      <div class="form-row">
+        <label for="image-upload">Food Image:</label>
+        <input type="file" id="image-upload" name="image-upload" accept=".gif,.jpg,.jpeg,.png,.webp,image/*" />
+      </div>
+      <button type="submit" class="submit-donation">Submit Donation</button>
+    </form>
+  </main>
+</body>
+</html>

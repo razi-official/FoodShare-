@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listings - FoodShare+</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <style>
+    body.listing-page {
+      background: url('/static/asset/bg4.png') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body.listing-page header .logo img {
+      content: url('/static/asset/logo.png');
+      width: 80px;
+      margin-right: 0.5rem;
+    }
+    .listing-container {
+      max-width: 1000px;
+      margin: 5rem auto 3rem auto;
+      padding: 0 1rem;
+    }
+    .top-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #2c5c2c;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      padding: 1rem 0;
+    }
+    .top-row img {
+      width: 120px;
+      margin-bottom: 0.5rem;
+    }
+    .top-row .subtitle {
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .listings-columns {
+      display: flex;
+      gap: 0;
+    }
+    .list-column h2 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+    .list-column h2 .column-icon {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .donation-column {
+      flex: 1;
+      background-color: rgb(43, 104, 43);
+      border-bottom-left-radius: 8px;
+      padding: 1rem;
+    }
+    .request-column {
+      flex: 1;
+      background-color: #e0a628;
+      border-bottom-right-radius: 8px;
+      padding: 1rem;
+    }
+    .listing-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      color: #333;
+    }
+    .listing-card img.profile-img {
+      display: block;
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 1rem auto;
+    }
+    .listing-card img.food-img {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 0.5rem auto;
+    }
+    .listing-card p {
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .listing-card p span.label {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .listing-card .card-menu {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.8rem;
+      font-size: 1.2rem;
+      color: #999;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="listing-page">
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="/static/asset/logo.png" alt="FoodShare+ Logo" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/donate">Donate</a></li>
+          <li><a href="/request">Request</a></li>
+          <li><a href="/listings" class="active">Listings</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="listing-container">
+      <div class="top-row">
+        <img src="/static/asset/logo2.png" alt="Large Logo" />
+        <div class="subtitle">Donation &amp; Request Listing</div>
+      </div>
+      <div class="listings-columns">
+        <div class="list-column donation-column">
+          <h2>
+            DONATE
+            <span class="column-icon">&#9660;</span>
+          </h2>
+          {% for d in donations %}
+          <div class="listing-card">
+            <div class="card-menu">...</div>
+            <img src="/static/asset/profile1.png" alt="Profile" class="profile-img" />
+            <p><span class="label">Name:</span> {{ d.name }}</p>
+            <p><span class="label">Type of Food:</span> {{ d.food_type }}</p>
+            <p><span class="label">Contact:</span> {{ d.contact }}</p>
+            <p><span class="label">Location:</span> {{ d.location }}</p>
+            <p><span class="label">Date:</span> {{ d.donation_date }}</p>
+            {% if d.image %}
+            <img src="/static/uploads/{{ d.image }}" alt="Food Image" class="food-img" />
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="list-column request-column">
+          <h2>
+            REQUEST
+            <span class="column-icon">&#9660;</span>
+          </h2>
+          {% for r in requests %}
+          <div class="listing-card">
+            <div class="card-menu">...</div>
+            <img src="/static/asset/profile1.png" alt="Profile" class="profile-img" />
+            <p><span class="label">Name:</span> {{ r.name }}</p>
+            <p><span class="label">Type of Request:</span> {{ r.type_request }}</p>
+            <p><span class="label">Contact:</span> {{ r.contact }}</p>
+            <p><span class="label">Quantity:</span> {{ r.quantity }}</p>
+            <p><span class="label">Urgency:</span> {{ r.urgency }}</p>
+            <p><span class="label">Special:</span> {{ r.special }}</p>
+            {% if r.image %}
+            <img src="/static/uploads/{{ r.image }}" alt="Food Image" class="food-img" />
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
