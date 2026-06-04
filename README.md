@@ -127,32 +127,6 @@ Uploaded images are stored in:
 static/uploads/
 ```
 
-These local runtime files are ignored by Git so they are not pushed to GitHub.
-
-Prepare For GitHub
-------------------
-
-Initialize Git if needed:
-
-```powershell
-git init
-```
-
-Stage and commit the project:
-
-```powershell
-git add .
-git commit -m "Initial FoodShare app"
-```
-
-Connect your GitHub repository:
-
-```powershell
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
-
 Notes
 -----
 
